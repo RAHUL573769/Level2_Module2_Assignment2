@@ -11,11 +11,12 @@ interface UserInfo {
   age: number;
   email: string;
   isActive: boolean;
+  hobbies: string[];
   address: {
     street: string;
     city: string;
     country: string;
   };
-  orders: string[];
+  orders: Object[];
 }
 export default UserInfo;
