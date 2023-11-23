@@ -1,6 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+const validator_1 = __importDefault(require("validator"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const userSchema = new mongoose_1.Schema({
     userId: {
         type: Number,
@@ -25,5 +30,75 @@ const userSchema = new mongoose_1.Schema({
             },
             message: "{VALUE} Is not in Capitalized Format"
         }
+    },
+    password: {
+        type: String,
+        required: [true, "Password IS Required"],
+        set: (x) => bcrypt_1.default.hashSync(x, bcrypt_1.default.genSaltSync(20))
+    },
+    fullName: {
+        firstName: {
+            type: String,
+            required: [true, "User Name is Required"],
+            trim: true,
+            validate: {
+                validator: function (value) {
+                    const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+                    if (value !== firstStr) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                    console.log(value);
+                },
+                message: "{VALUE} Is not in Capitalized Format"
+            }
+        },
+        lastName: {
+            type: String,
+            required: [true, "User Name is Required"],
+            trim: true,
+            validate: {
+                validator: function (value) {
+                    const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+                    if (value !== firstStr) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                    console.log(value);
+                },
+                message: "{VALUE} Is not in Capitalized Format"
+            }
+        }
+    },
+    age: {
+        type: Number
+    },
+    email: {
+        type: String,
+        required: [true, "Email Is Required"],
+        unique: true,
+        validate: {
+            validator: (value) => validator_1.default.isEmail(value),
+            message: "{Value} is not a Valid Email"
+        }
+    },
+    isActive: {
+        type: Boolean
+    },
+    hobbies: {
+        type: [String]
+    },
+    address: {
+        street: String,
+        city: String,
+        country: String
+    },
+    orders: {
+        type: [Object]
     }
 });
+exports.default = userSchema;
