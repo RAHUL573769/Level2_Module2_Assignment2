@@ -41,8 +41,43 @@ const getAllUser = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+const getSpecificUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await userServices.getSpecificUser(id);
+
+    console.log("Specific User Found Succesfully");
+    console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const userData = req.body;
+    const result = await userServices.updateUser(id, userData);
+
+    console.log(" Updated  Succesfully");
+    console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
+
 export const userController = {
   printUser,
   createUser,
-  getAllUser
+  getAllUser,
+  getSpecificUser,
+  updateUser
 };

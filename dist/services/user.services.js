@@ -26,8 +26,13 @@ const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.find();
     return result;
 });
+const getSpecificUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.default.findById(id);
+    return result;
+});
 exports.userServices = {
     printUser,
     createUser,
-    getAllUser
+    getAllUser,
+    getSpecificUser
 };

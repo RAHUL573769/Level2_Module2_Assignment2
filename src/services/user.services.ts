@@ -18,8 +18,28 @@ const getAllUser = async (): Promise<UserInfo[]> => {
   return result;
 };
 
+const getSpecificUser = async (id: string): Promise<UserInfo | null> => {
+  const result = await UserModel.findById(id);
+
+  return result;
+};
+
+const updateUser = async (
+  id: string,
+  data: UserInfo
+): Promise<UserInfo | null> => {
+  const result1 = await UserModel.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true
+  });
+
+  return result1;
+};
+
 export const userServices = {
   printUser,
   createUser,
-  getAllUser
+  getAllUser,
+  getSpecificUser,
+  updateUser
 };

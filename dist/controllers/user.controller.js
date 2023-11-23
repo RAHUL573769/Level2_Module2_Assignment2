@@ -48,8 +48,23 @@ const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
+const getSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const result = yield user_services_1.userServices.getSpecificUser(id);
+        console.log("Specific User Found Succesfully");
+        console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 exports.userController = {
     printUser,
     createUser,
-    getAllUser
+    getAllUser,
+    getSpecificUser
 };

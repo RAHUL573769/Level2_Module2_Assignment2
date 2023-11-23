@@ -13,4 +13,6 @@ app.use("/", userRouter.router);
 app.use("/create", userRouter.router);
 
 app.use("/read", userRouter.router);
+app.use("/specific", userRouter.router);
+app.use("/update", userRouter.router);
 export default app;
