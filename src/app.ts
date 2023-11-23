@@ -1,2 +1,8 @@
-let message: string = "Hello, World!";
-console.log(message);
+import express from "express";
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+export default app;
