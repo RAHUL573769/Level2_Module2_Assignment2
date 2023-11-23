@@ -26,7 +26,23 @@ const createUser = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+const getAllUser = async (req: Request, res: Response) => {
+  try {
+    const result = await userServices.getAllUser();
+
+    console.log("Data Found Succesfully");
+    console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
 export const userController = {
   printUser,
-  createUser
+  createUser,
+  getAllUser
 };

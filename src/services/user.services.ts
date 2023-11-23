@@ -8,11 +8,18 @@ const printUser = async () => {
 
 const createUser = async (data: UserInfo): Promise<UserInfo> => {
   const result = await UserModel.create(data);
-  console.log("Hi");
+  console.log("Data Added");
+  return result;
+};
+
+const getAllUser = async (): Promise<UserInfo[]> => {
+  const result = await UserModel.find();
+
   return result;
 };
 
 export const userServices = {
   printUser,
-  createUser
+  createUser,
+  getAllUser
 };

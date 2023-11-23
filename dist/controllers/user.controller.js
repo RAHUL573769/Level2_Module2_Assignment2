@@ -35,7 +35,21 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
+const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_services_1.userServices.getAllUser();
+        console.log("Data Found Succesfully");
+        console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 exports.userController = {
     printUser,
-    createUser
+    createUser,
+    getAllUser
 };

@@ -19,10 +19,15 @@ const printUser = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.create(data);
-    console.log("Hi");
+    console.log("Data Added");
+    return result;
+});
+const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.default.find();
     return result;
 });
 exports.userServices = {
     printUser,
-    createUser
+    createUser,
+    getAllUser
 };

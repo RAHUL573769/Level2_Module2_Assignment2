@@ -11,4 +11,6 @@ app.use(cors());
 
 app.use("/", userRouter.router);
 app.use("/create", userRouter.router);
+
+app.use("/read", userRouter.router);
 export default app;
