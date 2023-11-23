@@ -21,6 +21,21 @@ const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         data: error;
     }
 });
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const inputData = req.body;
+        // console.log(inputData);
+        const result = yield user_services_1.userServices.createUser(inputData);
+        console.log("Dta Added Succesfully");
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 exports.userController = {
-    printUser
+    printUser,
+    createUser
 };

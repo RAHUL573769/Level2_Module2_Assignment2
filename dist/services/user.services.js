@@ -8,11 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userServices = void 0;
+const user_model_1 = __importDefault(require("../models/user.model"));
 const printUser = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Hello from User Database");
 });
+const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.default.create(data);
+    console.log("Hi");
+    return result;
+});
 exports.userServices = {
-    printUser
+    printUser,
+    createUser
 };

@@ -10,4 +10,5 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/", userRouter.router);
+app.use("/create", userRouter.router);
 export default app;

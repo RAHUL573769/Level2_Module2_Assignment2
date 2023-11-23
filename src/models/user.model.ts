@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import UserInfo from "../interfaces/user.interface";
 import validator from "validator";
 import bcrypt from "bcrypt";
@@ -12,7 +12,7 @@ const userSchema = new Schema<UserInfo>({
     type: String,
     required: [true, "User Name is Required"],
     trim: true,
-    maxlength: [20, "Please Enter User Name Less Than 20"],
+    // maxlength: [20, "Please Enter User Name Less Than 20"],
     validate: {
       validator: function (value: string) {
         const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
@@ -94,4 +94,6 @@ const userSchema = new Schema<UserInfo>({
     type: [Object]
   }
 });
-export default userSchema;
+
+const UserModel = model<UserInfo>("user", userSchema);
+export default UserModel;

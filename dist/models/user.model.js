@@ -16,7 +16,7 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "User Name is Required"],
         trim: true,
-        maxlength: [20, "Please Enter User Name Less Than 20"],
+        // maxlength: [20, "Please Enter User Name Less Than 20"],
         validate: {
             validator: function (value) {
                 const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
@@ -101,4 +101,5 @@ const userSchema = new mongoose_1.Schema({
         type: [Object]
     }
 });
-exports.default = userSchema;
+const UserModel = (0, mongoose_1.model)("user", userSchema);
+exports.default = UserModel;
