@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/", userRouter.router);
-app.use("/create", userRouter.router);
+app.use("/api", userRouter.router);
 
 app.use("/read", userRouter.router);
 app.use("/specific", userRouter.router);

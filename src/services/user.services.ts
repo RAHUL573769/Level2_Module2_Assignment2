@@ -8,7 +8,6 @@ const printUser = async () => {
 
 const createUser = async (data: UserInfo): Promise<UserInfo> => {
   const result = await UserModel.create(data);
-  console.log("Data Added");
   return result;
 };
 

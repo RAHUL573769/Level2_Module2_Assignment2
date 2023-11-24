@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userServices } from "../services/user.services";
+import UserModel from "../models/user.model";
 
 const printUser = async (req: Request, res: Response) => {
   try {
@@ -14,10 +15,17 @@ const printUser = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   try {
     const inputData = req.body;
-    // console.log(inputData);
+    console.log(inputData);
     const result = await userServices.createUser(inputData);
+    // const result = await UserModel.create(inputData);
 
     console.log("Dta Added Succesfully");
+
+    res.status(201).json({
+      message: "User Created",
+      status: "success",
+      data: result
+    });
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;

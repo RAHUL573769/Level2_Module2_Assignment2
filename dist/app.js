@@ -13,7 +13,8 @@ app.get("/", (req, res) => {
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use("/", user_router_1.userRouter.router);
-app.use("/create", user_router_1.userRouter.router);
+app.use("/api", user_router_1.userRouter.router);
 app.use("/read", user_router_1.userRouter.router);
 app.use("/specific", user_router_1.userRouter.router);
+app.use("/update", user_router_1.userRouter.router);
 exports.default = app;

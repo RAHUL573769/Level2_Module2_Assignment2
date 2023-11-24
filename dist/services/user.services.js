@@ -19,7 +19,6 @@ const printUser = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.create(data);
-    console.log("Data Added");
     return result;
 });
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,9 +29,17 @@ const getSpecificUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.findById(id);
     return result;
 });
+const updateUser = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result1 = yield user_model_1.default.findByIdAndUpdate(id, data, {
+        new: true,
+        runValidators: true
+    });
+    return result1;
+});
 exports.userServices = {
     printUser,
     createUser,
     getAllUser,
-    getSpecificUser
+    getSpecificUser,
+    updateUser
 };

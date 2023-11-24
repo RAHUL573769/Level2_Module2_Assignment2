@@ -24,9 +24,15 @@ const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const inputData = req.body;
-        // console.log(inputData);
+        console.log(inputData);
         const result = yield user_services_1.userServices.createUser(inputData);
+        // const result = await UserModel.create(inputData);
         console.log("Dta Added Succesfully");
+        res.status(201).json({
+            message: "User Created",
+            status: "success",
+            data: result
+        });
     }
     catch (error) {
         // message: "There is an Error Printing The users";
@@ -62,9 +68,25 @@ const getSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function
         console.log(error);
     }
 });
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const userData = req.body;
+        const result = yield user_services_1.userServices.updateUser(id, userData);
+        console.log(" Updated  Succesfully");
+        console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 exports.userController = {
     printUser,
     createUser,
     getAllUser,
-    getSpecificUser
+    getSpecificUser,
+    updateUser
 };

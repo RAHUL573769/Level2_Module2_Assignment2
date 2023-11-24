@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const validator_1 = __importDefault(require("validator"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const userSchema = new mongoose_1.Schema({
     userId: {
@@ -15,7 +14,7 @@ const userSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: [true, "User Name is Required"],
-        trim: true,
+        // trim: true,
         // maxlength: [20, "Please Enter User Name Less Than 20"],
         validate: {
             validator: function (value) {
@@ -39,56 +38,50 @@ const userSchema = new mongoose_1.Schema({
     fullName: {
         firstName: {
             type: String,
-            required: [true, "User Name is Required"],
-            trim: true,
-            validate: {
-                validator: function (value) {
-                    const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
-                    if (value !== firstStr) {
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                    console.log(value);
-                },
-                message: "{VALUE} Is not in Capitalized Format"
-            }
+            // required: [true, "User Name is Required"],
+            trim: true
+            // validate: {
+            //   validator: function (value: string) {
+            //     const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+            //     if (value !== firstStr) {
+            //       return false;
+            //     } else {
+            //       return true;
+            //     }
+            //     console.log(value);
+            //   },
+            //   message: "{VALUE} Is not in Capitalized Format"
+            // }
         },
         lastName: {
-            type: String,
-            required: [true, "User Name is Required"],
-            trim: true,
-            validate: {
-                validator: function (value) {
-                    const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
-                    if (value !== firstStr) {
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                    console.log(value);
-                },
-                message: "{VALUE} Is not in Capitalized Format"
-            }
+            type: String
+            // required: [true, "User Name is Required"],
+            // trim: true,
+            // validate: {
+            //   validator: function (value: string) {
+            //     const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+            //     if (value !== firstStr) {
+            //       return false;
+            //     } else {
+            //       return true;
+            //     }
+            //     console.log(value);
+            //   },
+            //   message: "{VALUE} Is not in Capitalized Format"
+            // }
         }
     },
-    age: {
-        type: Number
-    },
+    age: Number,
     email: {
         type: String,
-        required: [true, "Email Is Required"],
-        unique: true,
-        validate: {
-            validator: (value) => validator_1.default.isEmail(value),
-            message: "{Value} is not a Valid Email"
-        }
+        required: [true, "Email Is Required"]
+        // unique: true,
+        // validate: {
+        //   validator: (value: string) => validator.isEmail(value),
+        //   message: "{Value} is not a Valid Email"
+        // }
     },
-    isActive: {
-        type: Boolean
-    },
+    isActive: Boolean,
     hobbies: {
         type: [String]
     },
