@@ -22,15 +22,14 @@ const createUser = async (req: Request, res: Response) => {
     console.log("Dta Added Succesfully");
 
     res.status(201).json({
-      message: "User Created",
-      status: "success",
+      success: true,
+      message: "User Created Succesfully",
       data: result
     });
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;
-    // data: error;
-
+    // data: error
     console.log(error);
   }
 };
@@ -40,7 +39,12 @@ const getAllUser = async (req: Request, res: Response) => {
     const result = await userServices.getAllUser();
 
     console.log("Data Found Succesfully");
-    console.log(result);
+    // console.log(result.filter);
+    res.status(201).json({
+      success: true,
+      message: "User Created Succesfully",
+      data: result
+    });
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;

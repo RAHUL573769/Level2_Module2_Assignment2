@@ -29,15 +29,15 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // const result = await UserModel.create(inputData);
         console.log("Dta Added Succesfully");
         res.status(201).json({
-            message: "User Created",
-            status: "success",
+            success: true,
+            message: "User Created Succesfully",
             data: result
         });
     }
     catch (error) {
         // message: "There is an Error Printing The users";
         // success: false;
-        // data: error;
+        // data: error
         console.log(error);
     }
 });
@@ -45,7 +45,12 @@ const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const result = yield user_services_1.userServices.getAllUser();
         console.log("Data Found Succesfully");
-        console.log(result);
+        // console.log(result.filter);
+        res.status(201).json({
+            success: true,
+            message: "User Created Succesfully",
+            data: result
+        });
     }
     catch (error) {
         // message: "There is an Error Printing The users";

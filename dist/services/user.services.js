@@ -22,7 +22,21 @@ const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.default.find();
+    const result = yield user_model_1.default.aggregate([
+        {
+            $project: {
+                userId: 1,
+                username: 1,
+                fullName: 1,
+                age: 1,
+                email: 1,
+                isActive: 1,
+                hobbies: 1,
+                address: 1,
+                orders: 1
+            }
+        }
+    ]);
     return result;
 });
 const getSpecificUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
