@@ -24,7 +24,6 @@ const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const inputData = req.body;
-        console.log(inputData);
         const result = yield user_services_1.userServices.createUser(inputData);
         // const result = await UserModel.create(inputData);
         console.log("Dta Added Succesfully");

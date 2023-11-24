@@ -7,6 +7,6 @@ router.get("/", userController.printUser);
 router.get("/users", userController.getAllUser);
 
 router.post("/users", userController.createUser);
-router.get("/specificUser/:id", userController.getSpecificUser);
+router.get("/users/:id", userController.getSpecificUser);
 router.patch("/updateUser/:id", userController.updateUser);
 export const userRouter = { router };

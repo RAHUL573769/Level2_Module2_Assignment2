@@ -10,6 +10,6 @@ const router = express_1.default.Router();
 router.get("/", user_controller_1.userController.printUser);
 router.get("/users", user_controller_1.userController.getAllUser);
 router.post("/users", user_controller_1.userController.createUser);
-router.get("/specificUser/:id", user_controller_1.userController.getSpecificUser);
+router.get("/users/:id", user_controller_1.userController.getSpecificUser);
 router.patch("/updateUser/:id", user_controller_1.userController.updateUser);
 exports.userRouter = { router };

@@ -8,6 +8,7 @@ const printUser = async () => {
 
 const createUser = async (data: UserInfo): Promise<UserInfo> => {
   const result = await UserModel.create(data);
+
   return result;
 };
 
@@ -15,15 +16,12 @@ const getAllUser = async (): Promise<UserInfo[]> => {
   const result = await UserModel.aggregate([
     {
       $project: {
-        userId: 1,
         username: 1,
         fullName: 1,
         age: 1,
         email: 1,
-        isActive: 1,
-        hobbies: 1,
-        address: 1,
-        orders: 1
+
+        address: 1
       }
     }
   ]);

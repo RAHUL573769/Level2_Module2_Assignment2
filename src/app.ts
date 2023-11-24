@@ -13,6 +13,6 @@ app.use("/", userRouter.router);
 app.use("/api", userRouter.router);
 
 app.use("/api", userRouter.router);
-app.use("/specific", userRouter.router);
+
 app.use("/update", userRouter.router);
 export default app;

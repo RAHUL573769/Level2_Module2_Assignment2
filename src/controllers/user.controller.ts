@@ -15,7 +15,6 @@ const printUser = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   try {
     const inputData = req.body;
-    console.log(inputData);
     const result = await userServices.createUser(inputData);
     // const result = await UserModel.create(inputData);
 
