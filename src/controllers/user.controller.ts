@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { userServices } from "../services/user.services";
 import UserModel from "../models/user.model";
+import Joi from "joi";
 
 const printUser = async (req: Request, res: Response) => {
   try {
@@ -14,11 +15,68 @@ const printUser = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const inputData = req.body;
-    const result = await userServices.createUser(inputData);
     // const result = await UserModel.create(inputData);
+    const userJoiSchema = Joi.object({
+      userId: Joi.number().required().messages({
+        "any.required": "Please enter an ID",
+        "number.base": "ID must be a number"
+      }),
+
+      username: Joi.string()
+        .required()
+        .custom((value, helpers) => {
+          const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+          if (value !== firstStr) {
+            return helpers.message({
+              message: "User Name Must Be Capitalized"
+            });
+          }
+          return value;
+        }),
+
+      password: Joi.string().required().messages({
+        "any.required": "Password is required"
+      }),
+
+      fullName: Joi.object({
+        firstName: Joi.string().trim(),
+        lastName: Joi.string().trim()
+      }),
+
+      age: Joi.number(),
+
+      email: Joi.string().email().required().messages({
+        "any.required": "Email is required",
+        "string.email": "Please enter a valid email address"
+      }),
+
+      isActive: Joi.boolean(),
+
+      hobbies: Joi.array().items(Joi.string()),
+
+      address: Joi.object({
+        street: Joi.string(),
+        city: Joi.string(),
+        country: Joi.string()
+      }),
+
+      orders: Joi.array().items(Joi.object())
+    });
 
     console.log("Dta Added Succesfully");
+    const inputData = req.body;
+    const { error, value } = userJoiSchema.validate(inputData);
+    if (error) {
+      res.status(500).json({
+        success: false,
+        message: "User validation Failed",
+        error: {
+          code: 404,
+          description: "Caanot Validate using Joi!"
+        }
+      });
+    }
+    const result = await userServices.createUser(inputData);
 
     res.status(201).json({
       success: true,

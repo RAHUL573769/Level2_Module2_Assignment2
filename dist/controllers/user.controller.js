@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
 const user_services_1 = require("../services/user.services");
+const joi_1 = __importDefault(require("joi"));
 const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         res.send(user_services_1.userServices.printUser);
@@ -23,10 +27,58 @@ const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const inputData = req.body;
-        const result = yield user_services_1.userServices.createUser(inputData);
         // const result = await UserModel.create(inputData);
+        const userJoiSchema = joi_1.default.object({
+            userId: joi_1.default.number().required().messages({
+                "any.required": "Please enter an ID",
+                "number.base": "ID must be a number"
+            }),
+            username: joi_1.default.string()
+                .required()
+                .custom((value, helpers) => {
+                const firstStr = value.charAt(0).toUpperCase() + value.slice(1);
+                if (value !== firstStr) {
+                    return helpers.message({
+                        message: "User Name Must Be Capitalized"
+                    });
+                }
+                return value;
+            }),
+            password: joi_1.default.string().required().messages({
+                "any.required": "Password is required"
+            }),
+            fullName: joi_1.default.object({
+                firstName: joi_1.default.string().trim(),
+                lastName: joi_1.default.string().trim()
+            }),
+            age: joi_1.default.number(),
+            email: joi_1.default.string().email().required().messages({
+                "any.required": "Email is required",
+                "string.email": "Please enter a valid email address"
+            }),
+            isActive: joi_1.default.boolean(),
+            hobbies: joi_1.default.array().items(joi_1.default.string()),
+            address: joi_1.default.object({
+                street: joi_1.default.string(),
+                city: joi_1.default.string(),
+                country: joi_1.default.string()
+            }),
+            orders: joi_1.default.array().items(joi_1.default.object())
+        });
         console.log("Dta Added Succesfully");
+        const inputData = req.body;
+        const { error, value } = userJoiSchema.validate(inputData);
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "User validation Failed",
+                error: {
+                    code: 404,
+                    description: "Caanot Validate using Joi!"
+                }
+            });
+        }
+        const result = yield user_services_1.userServices.createUser(inputData);
         res.status(201).json({
             success: true,
             message: "User Created Succesfully",
