@@ -9,5 +9,9 @@ This is a Basic Crud Operations in ExpressJs and TypeScript
 
 4.Joi validation is done
 
+  How Does The Api Works:
   Get:https://level2-assignment-2-omega.vercel.app/api/users  
-  POST:https://level2-assignment-2-omega.vercel.app/api/users
+  POST:https://level2-assignment-2-omega.vercel.app/api/users  
+  Get Specific Users:https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
+  Delete:https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
+  Patch::https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
