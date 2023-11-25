@@ -9,7 +9,6 @@ router.get("/users", userController.getAllUser);
 router.post("/users", userController.createUser);
 router.get("/users/:id", userController.getSpecificUser);
 
-router.put("/users/:id", userController.updateUser);
 router.patch("/users/:id", userController.updateUser);
 router.delete("/users/:id", userController.deleteUser);
 router.patch("/users/:id/orders", userController.appendUser);

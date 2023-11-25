@@ -16,6 +16,8 @@ const printUser = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   try {
     // const result = await UserModel.create(inputData);
+
+    //Joi Validation
     const userJoiSchema = Joi.object({
       userId: Joi.number().required().messages({
         "any.required": "Please enter an ID",
@@ -63,7 +65,6 @@ const createUser = async (req: Request, res: Response) => {
       orders: Joi.array().items(Joi.object())
     });
 
-    console.log("Dta Added Succesfully");
     const inputData = req.body;
     const { error, value } = userJoiSchema.validate(inputData);
     if (error) {
@@ -72,12 +73,12 @@ const createUser = async (req: Request, res: Response) => {
         message: "User validation Failed",
         error: {
           code: 404,
-          description: "Caanot Validate using Joi!"
+          description: "Canot Validate using Joi!"
         }
       });
-    }
+    } //Joi Validation Finished
     const result = await userServices.createUser(inputData);
-
+    console.log(result);
     res.status(201).json({
       success: true,
       message: "User Created Succesfully",
@@ -87,7 +88,7 @@ const createUser = async (req: Request, res: Response) => {
     // message: "There is an Error Printing The users";
     // success: false;
     // data: error
-    res.status(201).json({
+    res.status(400).json({
       success: false,
       message: "User Is not Created Succesfully"
     });
@@ -122,7 +123,7 @@ const getSpecificUser = async (req: Request, res: Response) => {
     const result = await userServices.getSpecificUser(id);
     res.status(201).json({
       success: true,
-      message: "User Fetched Succesfully",
+      message: "Specific User Fetched Succesfully",
       data: result
     });
 
@@ -144,14 +145,16 @@ const updateUser = async (req: Request, res: Response) => {
     const userData = req.body;
     const result = await userServices.updateUser(id, userData);
 
-    console.log(" Updated  Succesfully");
-    console.log(result);
+    res.status(200).json({
+      message: "Update Succesfully Done",
+      success: true,
+      data: result
+    });
   } catch (error) {
-    // message: "There is an Error Printing The users";
-    // success: false;
-    // data: error;
-
-    console.log(error);
+    res.status(400).json({
+      message: "Update Failed ",
+      success: false
+    });
   }
 };
 
@@ -159,15 +162,20 @@ const deleteUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const result = await userServices.deleteUser(id);
-
-    console.log(" Data Deleted Succesfully");
-    console.log(result);
+    res.status(202).json(result);
+    // res.status(200).json({
+    //   message: "DeleteSuccesfully Done",
+    //   success: true,
+    //   data: result
+    // });
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;
     // data: error;
-
-    console.log(error);
+    res.status(400).json({
+      message: "Delete Failed",
+      success: false
+    });
   }
 };
 

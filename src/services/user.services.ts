@@ -136,6 +136,7 @@ const updateUser = async (
 
   return result1;
 };
+
 const deleteUser = async (
   id: string
 ): Promise<UserInfo | DeleteResponse | null | undefined> => {
@@ -149,7 +150,7 @@ const deleteUser = async (
   } else {
     return {
       success: false,
-      message: "User deleted unsuccesfull!",
+      message: "User Deletion Failed",
       data: "User Deletion Failed"
     };
   }
@@ -188,7 +189,7 @@ const appendProducts = async (
   } else {
     return {
       success: false,
-      message: "User Not Found",
+      message: "Appending Products Failed",
       error: {
         code: 404,
         description: "User not found!"
@@ -217,7 +218,7 @@ const getAllUsersOrder = async (): Promise<
   } else {
     return {
       success: false,
-      message: "User Not Found",
+      message: "User Order Calculation Found",
       error: {
         code: 404,
         description: "User not found!"
@@ -245,12 +246,12 @@ const totalUserOrder = async (): Promise<
     return {
       success: true,
       message: "Total price calculated successfully!",
-      data: { totalUserOrder }
+      data: { totalPrice: totalUserOrder }
     };
   } else {
     return {
       success: false,
-      message: "User Not Found",
+      message: "Total price Calculation Failed",
       error: {
         code: 404,
         description: "User not found!"

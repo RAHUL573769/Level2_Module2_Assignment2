@@ -28,6 +28,7 @@ const printUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // const result = await UserModel.create(inputData);
+        //Joi Validation
         const userJoiSchema = joi_1.default.object({
             userId: joi_1.default.number().required().messages({
                 "any.required": "Please enter an ID",
@@ -65,7 +66,6 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             }),
             orders: joi_1.default.array().items(joi_1.default.object())
         });
-        console.log("Dta Added Succesfully");
         const inputData = req.body;
         const { error, value } = userJoiSchema.validate(inputData);
         if (error) {
@@ -74,11 +74,12 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 message: "User validation Failed",
                 error: {
                     code: 404,
-                    description: "Caanot Validate using Joi!"
+                    description: "Canot Validate using Joi!"
                 }
             });
-        }
+        } //Joi Validation Finished
         const result = yield user_services_1.userServices.createUser(inputData);
+        console.log(result);
         res.status(201).json({
             success: true,
             message: "User Created Succesfully",
@@ -89,7 +90,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // message: "There is an Error Printing The users";
         // success: false;
         // data: error
-        res.status(201).json({
+        res.status(400).json({
             success: false,
             message: "User Is not Created Succesfully"
         });
@@ -122,7 +123,7 @@ const getSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function
         const result = yield user_services_1.userServices.getSpecificUser(id);
         res.status(201).json({
             success: true,
-            message: "User Fetched Succesfully",
+            message: "Specific User Fetched Succesfully",
             data: result
         });
         console.log(result);
@@ -142,28 +143,38 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const id = req.params.id;
         const userData = req.body;
         const result = yield user_services_1.userServices.updateUser(id, userData);
-        console.log(" Updated  Succesfully");
-        console.log(result);
+        res.status(200).json({
+            message: "Update Succesfully Done",
+            success: true,
+            data: result
+        });
     }
     catch (error) {
-        // message: "There is an Error Printing The users";
-        // success: false;
-        // data: error;
-        console.log(error);
+        res.status(400).json({
+            message: "Update Failed ",
+            success: false
+        });
     }
 });
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const result = yield user_services_1.userServices.deleteUser(id);
-        console.log(" Data Deleted Succesfully");
-        console.log(result);
+        res.status(202).json(result);
+        // res.status(200).json({
+        //   message: "DeleteSuccesfully Done",
+        //   success: true,
+        //   data: result
+        // });
     }
     catch (error) {
         // message: "There is an Error Printing The users";
         // success: false;
         // data: error;
-        console.log(error);
+        res.status(400).json({
+            message: "Delete Failed",
+            success: false
+        });
     }
 });
 const appendUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

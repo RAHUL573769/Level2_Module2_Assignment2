@@ -11,7 +11,6 @@ router.get("/", user_controller_1.userController.printUser);
 router.get("/users", user_controller_1.userController.getAllUser);
 router.post("/users", user_controller_1.userController.createUser);
 router.get("/users/:id", user_controller_1.userController.getSpecificUser);
-router.put("/users/:id", user_controller_1.userController.updateUser);
 router.patch("/users/:id", user_controller_1.userController.updateUser);
 router.delete("/users/:id", user_controller_1.userController.deleteUser);
 router.patch("/users/:id/orders", user_controller_1.userController.appendUser);

@@ -118,7 +118,7 @@ const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     else {
         return {
             success: false,
-            message: "User deleted unsuccesfull!",
+            message: "User Deletion Failed",
             data: "User Deletion Failed"
         };
     }
@@ -141,7 +141,7 @@ const appendProducts = (id, data, newProducts) => __awaiter(void 0, void 0, void
     else {
         return {
             success: false,
-            message: "User Not Found",
+            message: "Appending Products Failed",
             error: {
                 code: 404,
                 description: "User not found!"
@@ -167,7 +167,7 @@ const getAllUsersOrder = () => __awaiter(void 0, void 0, void 0, function* () {
     else {
         return {
             success: false,
-            message: "User Not Found",
+            message: "User Order Calculation Found",
             error: {
                 code: 404,
                 description: "User not found!"
@@ -192,13 +192,13 @@ const totalUserOrder = () => __awaiter(void 0, void 0, void 0, function* () {
         return {
             success: true,
             message: "Total price calculated successfully!",
-            data: { totalUserOrder }
+            data: { totalPrice: totalUserOrder }
         };
     }
     else {
         return {
             success: false,
-            message: "User Not Found",
+            message: "Total price Calculation Failed",
             error: {
                 code: 404,
                 description: "User not found!"
