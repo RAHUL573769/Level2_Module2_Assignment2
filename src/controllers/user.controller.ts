@@ -102,15 +102,17 @@ const getAllUser = async (req: Request, res: Response) => {
     // console.log(result.filter);
     res.status(201).json({
       success: true,
-      message: "User Created Succesfully",
+      message: "User Fetched Succesfully",
       data: result
     });
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;
     // data: error;
-
-    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "User Isnot Fetched Succesfully"
+    });
   }
 };
 
@@ -118,13 +120,22 @@ const getSpecificUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const result = await userServices.getSpecificUser(id);
+    res.status(201).json({
+      success: true,
+      message: "User Fetched Succesfully",
+      data: result
+    });
+
     console.log(result);
   } catch (error) {
     // message: "There is an Error Printing The users";
     // success: false;
     // data: error;
 
-    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "User Not Found"
+    });
   }
 };
 const updateUser = async (req: Request, res: Response) => {

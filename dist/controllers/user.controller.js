@@ -102,7 +102,7 @@ const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // console.log(result.filter);
         res.status(201).json({
             success: true,
-            message: "User Created Succesfully",
+            message: "User Fetched Succesfully",
             data: result
         });
     }
@@ -110,20 +110,31 @@ const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // message: "There is an Error Printing The users";
         // success: false;
         // data: error;
-        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "User Isnot Fetched Succesfully"
+        });
     }
 });
 const getSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const result = yield user_services_1.userServices.getSpecificUser(id);
+        res.status(201).json({
+            success: true,
+            message: "User Fetched Succesfully",
+            data: result
+        });
         console.log(result);
     }
     catch (error) {
         // message: "There is an Error Printing The users";
         // success: false;
         // data: error;
-        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "User Not Found"
+        });
     }
 });
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
