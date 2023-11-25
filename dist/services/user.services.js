@@ -79,10 +79,95 @@ const updateUser = (id, data) => __awaiter(void 0, void 0, void 0, function* () 
     });
     return result1;
 });
+const appendProducts = (id, data, newProducts) => __awaiter(void 0, void 0, void 0, function* () {
+    const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = data;
+    console.log("116", orders[0]);
+    if (orders.length != 0) {
+        let appendedProduct = orders.push(newProducts);
+        const result1 = yield user_model_1.default.findByIdAndUpdate(id, {
+            new: true,
+            runValidators: true
+        });
+        return {
+            productName: orders,
+            price: 1234,
+            quantity: 12
+        };
+    }
+    else {
+        return {
+            success: false,
+            message: "User Not Found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        };
+    }
+});
+const getAllUsersOrder = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.default.aggregate([
+        {
+            $project: {
+                orders: 1
+            }
+        }
+    ]); //aggregate finished
+    if (result) {
+        return {
+            productName: {},
+            price: 23.56,
+            quantity: 2
+        };
+    }
+    else {
+        return {
+            success: false,
+            message: "User Not Found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        };
+    }
+});
+const totalUserOrder = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.default.aggregate([
+        {
+            $project: {
+                orders: 1
+            }
+        }
+    ]); //aggregate finished
+    if (result) {
+        result.forEach((price) => {
+            let finalPrice = 0;
+            const priceCalculation = price.orders[0].price;
+            const totalUserOrder = finalPrice + priceCalculation;
+        });
+        return {
+            success: true,
+            message: "Total price calculated successfully!",
+            data: { totalUserOrder }
+        };
+    }
+    else {
+        return {
+            success: false,
+            message: "User Not Found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        };
+    }
+});
 exports.userServices = {
     printUser,
     createUser,
     getAllUser,
     getSpecificUser,
-    updateUser
+    updateUser,
+    appendProducts,
+    totalUserOrder
 };

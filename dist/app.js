@@ -15,5 +15,5 @@ app.use((0, cors_1.default)());
 app.use("/", user_router_1.userRouter.router);
 app.use("/api", user_router_1.userRouter.router);
 app.use("/api", user_router_1.userRouter.router);
-app.use("/update", user_router_1.userRouter.router);
+app.use("/api", user_router_1.userRouter.router);
 exports.default = app;

@@ -8,5 +8,11 @@ router.get("/users", userController.getAllUser);
 
 router.post("/users", userController.createUser);
 router.get("/users/:id", userController.getSpecificUser);
-router.patch("/updateUser/:id", userController.updateUser);
+router.patch("/users/:id", userController.updateUser);
+
+router.patch("/users/:id/orders", userController.appendUser);
+
+router.get("/users/:id/orders", userController.appendUser);
+router.get("/users/:id/orders/total-price", userController.totalUser);
+
 export const userRouter = { router };

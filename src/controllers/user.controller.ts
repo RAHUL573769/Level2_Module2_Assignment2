@@ -83,10 +83,46 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const appendUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const userData = req.body;
+    const newProduct = req.body;
+    const result = await userServices.appendProducts(id, userData, newProduct);
+
+    console.log(" Updated  Succesfully");
+    // console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
+const totalUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const userData = req.body;
+    const newProduct = req.body;
+    // const result = await userServices.appendProducts(id, userData, newProduct);
+    const result = await userServices.totalUserOrder();
+    console.log(" Updated  Succesfully");
+    // console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
 export const userController = {
   printUser,
   createUser,
   getAllUser,
   getSpecificUser,
-  updateUser
+  updateUser,
+  appendUser,
+  totalUser
 };

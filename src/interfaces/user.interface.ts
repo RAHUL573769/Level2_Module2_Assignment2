@@ -30,4 +30,10 @@ interface errorOutput {
   error: any;
 }
 
-export { UserInfo, Output, errorOutput };
+interface Product1 {
+  productName: object;
+  price: number;
+  quantity: number;
+}
+
+export { UserInfo, Output, errorOutput, Product1 };

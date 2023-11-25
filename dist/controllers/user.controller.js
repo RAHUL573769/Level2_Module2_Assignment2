@@ -86,10 +86,45 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
+const appendUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const userData = req.body;
+        const newProduct = req.body;
+        const result = yield user_services_1.userServices.appendProducts(id, userData, newProduct);
+        console.log(" Updated  Succesfully");
+        // console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
+const totalUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const userData = req.body;
+        const newProduct = req.body;
+        // const result = await userServices.appendProducts(id, userData, newProduct);
+        const result = yield user_services_1.userServices.totalUserOrder();
+        console.log(" Updated  Succesfully");
+        // console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 exports.userController = {
     printUser,
     createUser,
     getAllUser,
     getSpecificUser,
-    updateUser
+    updateUser,
+    appendUser,
+    totalUser
 };

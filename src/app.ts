@@ -14,5 +14,5 @@ app.use("/api", userRouter.router);
 
 app.use("/api", userRouter.router);
 
-app.use("/update", userRouter.router);
+app.use("/api", userRouter.router);
 export default app;
