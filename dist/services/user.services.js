@@ -25,10 +25,13 @@ const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.aggregate([
         {
             $project: {
+                userId: 1,
                 username: 1,
                 fullName: 1,
                 age: 1,
                 email: 1,
+                isActive: 1,
+                hobbies: 1,
                 address: 1
             }
         }
@@ -37,7 +40,37 @@ const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getSpecificUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.findById(id);
-    return result;
+    if (result) {
+        // Exclude the password field from the response
+        const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = result;
+        return {
+            success: true,
+            message: "User retrieved successfully.",
+            data: {
+                userId: userId,
+                username: username,
+                fullName: fullName,
+                age: age,
+                email: email,
+                isActive: isActive,
+                hobbies: hobbies,
+                address: address,
+                orders: {
+                    orders
+                }
+            }
+        };
+    }
+    else {
+        return {
+            success: false,
+            message: "User Not Found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        };
+    }
 });
 const updateUser = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     const result1 = yield user_model_1.default.findByIdAndUpdate(id, data, {

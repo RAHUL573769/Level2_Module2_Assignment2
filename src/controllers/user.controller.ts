@@ -57,8 +57,6 @@ const getSpecificUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const result = await userServices.getSpecificUser(id);
-
-    console.log("Specific User Found Succesfully");
     console.log(result);
   } catch (error) {
     // message: "There is an Error Printing The users";

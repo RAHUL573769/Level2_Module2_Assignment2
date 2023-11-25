@@ -19,4 +19,15 @@ interface UserInfo {
   };
   orders: Object[];
 }
-export default UserInfo;
+interface Output {
+  success: boolean;
+  message: string;
+  data: any;
+}
+interface errorOutput {
+  success: boolean;
+  message: string;
+  error: any;
+}
+
+export { UserInfo, Output, errorOutput };

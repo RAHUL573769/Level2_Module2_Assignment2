@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import UserInfo from "../interfaces/user.interface";
+import { UserInfo } from "../interfaces/user.interface";
 import validator from "validator";
 import bcrypt from "bcrypt";
 const userSchema = new Schema<UserInfo>({

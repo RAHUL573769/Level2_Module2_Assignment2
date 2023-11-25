@@ -1,4 +1,4 @@
-import UserInfo from "../interfaces/user.interface";
+import { UserInfo, Output, errorOutput } from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 import userSchema from "../models/user.model";
 
@@ -16,11 +16,13 @@ const getAllUser = async (): Promise<UserInfo[]> => {
   const result = await UserModel.aggregate([
     {
       $project: {
+        userId: 1,
         username: 1,
         fullName: 1,
         age: 1,
         email: 1,
-
+        isActive: 1,
+        hobbies: 1,
         address: 1
       }
     }
@@ -29,10 +31,53 @@ const getAllUser = async (): Promise<UserInfo[]> => {
   return result;
 };
 
-const getSpecificUser = async (id: string): Promise<UserInfo | null> => {
+const getSpecificUser = async (
+  id: string
+): Promise<Output | errorOutput | undefined> => {
   const result = await UserModel.findById(id);
 
-  return result;
+  if (result) {
+    // Exclude the password field from the response
+    const {
+      password,
+      username,
+      isActive,
+      userId,
+      fullName,
+      address,
+      age,
+      email,
+      hobbies,
+      orders
+    } = result;
+    return {
+      success: true,
+      message: "User retrieved successfully.",
+      data: {
+        userId: userId,
+        username: username,
+        fullName: fullName,
+
+        age: age,
+        email: email,
+        isActive: isActive,
+        hobbies: hobbies,
+        address: address,
+        orders: {
+          orders
+        }
+      }
+    };
+  } else {
+    return {
+      success: false,
+      message: "User Not Found",
+      error: {
+        code: 404,
+        description: "User not found!"
+      }
+    };
+  }
 };
 
 const updateUser = async (
