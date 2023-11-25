@@ -13,41 +13,51 @@ const printUser = async () => {
   console.log("Hello from User Database");
 };
 
-const createUser = async (data: UserInfo): Promise<UserInfo | PostResponse> => {
-  const result = await UserModel.create(data);
-  const {
-    password,
-    username,
-    isActive,
-    userId,
-    fullName,
-    address,
-    age,
-    email,
-    hobbies,
-    orders
-  } = result;
-  return {
-    success: true,
-    message: "User created successfully!",
-    data: {
-      userId: userId,
-      username: username,
-      fullName: {
-        firstName: fullName.firstName,
-        lastName: fullName.lastName
-      },
-      age: age,
-      email: email,
-      isActive: isActive,
-      hobbies: [hobbies[0], hobbies[1]],
-      address: {
-        street: address.street,
-        city: address.city,
-        country: address.country
+const createUser = async (
+  data: UserInfo
+): Promise<UserInfo | PostResponse | errorOutput | undefined> => {
+  try {
+    const result = await UserModel.create(data);
+    const {
+      password,
+      username,
+      isActive,
+      userId,
+      fullName,
+      address,
+      age,
+      email,
+      hobbies,
+      orders
+    } = result;
+    return {
+      success: true,
+      message: "User created successfully!",
+      data: {
+        userId: userId,
+        username: username,
+        fullName: {
+          firstName: fullName.firstName,
+          lastName: fullName.lastName
+        },
+        age: age,
+        email: email,
+        isActive: isActive,
+        hobbies: [hobbies[0], hobbies[1]],
+        address: {
+          street: address.street,
+          city: address.city,
+          country: address.country
+        }
       }
-    }
-  };
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Data Creation Failed",
+      error: "Failed"
+    };
+  }
 };
 const getAllUser = async (): Promise<UserInfo[]> => {
   const result = await UserModel.aggregate([

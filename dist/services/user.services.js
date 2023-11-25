@@ -18,29 +18,38 @@ const printUser = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Hello from User Database");
 });
 const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.default.create(data);
-    const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = result;
-    return {
-        success: true,
-        message: "User created successfully!",
-        data: {
-            userId: userId,
-            username: username,
-            fullName: {
-                firstName: fullName.firstName,
-                lastName: fullName.lastName
-            },
-            age: age,
-            email: email,
-            isActive: isActive,
-            hobbies: [hobbies[0], hobbies[1]],
-            address: {
-                street: address.street,
-                city: address.city,
-                country: address.country
+    try {
+        const result = yield user_model_1.default.create(data);
+        const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = result;
+        return {
+            success: true,
+            message: "User created successfully!",
+            data: {
+                userId: userId,
+                username: username,
+                fullName: {
+                    firstName: fullName.firstName,
+                    lastName: fullName.lastName
+                },
+                age: age,
+                email: email,
+                isActive: isActive,
+                hobbies: [hobbies[0], hobbies[1]],
+                address: {
+                    street: address.street,
+                    city: address.city,
+                    country: address.country
+                }
             }
-        }
-    };
+        };
+    }
+    catch (error) {
+        return {
+            success: false,
+            message: "Data Creation Failed",
+            error: "Failed"
+        };
+    }
 });
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.aggregate([
