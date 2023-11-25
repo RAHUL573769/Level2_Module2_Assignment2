@@ -8,3 +8,6 @@ This is a Basic Crud Operations in ExpressJs and TypeScript
 3.Mongodb is Used as a Database  
 
 4.Joi validation is done
+
+  Get:https://level2-assignment-2-omega.vercel.app/api/users  
+  POST:https://level2-assignment-2-omega.vercel.app/api/users
