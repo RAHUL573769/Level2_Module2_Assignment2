@@ -12,6 +12,7 @@ router.get("/users", user_controller_1.userController.getAllUser);
 router.post("/users", user_controller_1.userController.createUser);
 router.get("/users/:id", user_controller_1.userController.getSpecificUser);
 router.patch("/users/:id", user_controller_1.userController.updateUser);
+router.delete("/users/:id", user_controller_1.userController.deleteUser);
 router.patch("/users/:id/orders", user_controller_1.userController.appendUser);
 router.get("/users/:id/orders", user_controller_1.userController.appendUser);
 router.get("/users/:id/orders/total-price", user_controller_1.userController.totalUser);

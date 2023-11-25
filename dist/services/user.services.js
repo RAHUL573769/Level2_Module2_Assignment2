@@ -19,19 +19,37 @@ const printUser = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const createUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.create(data);
-    return result;
+    const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = result;
+    return {
+        success: true,
+        message: "User created successfully!",
+        data: {
+            userId: userId,
+            username: username,
+            fullName: {
+                firstName: fullName.firstName,
+                lastName: fullName.lastName
+            },
+            age: age,
+            email: email,
+            isActive: isActive,
+            hobbies: [hobbies[0], hobbies[1]],
+            address: {
+                street: address.street,
+                city: address.city,
+                country: address.country
+            }
+        }
+    };
 });
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.aggregate([
         {
             $project: {
-                userId: 1,
                 username: 1,
                 fullName: 1,
                 age: 1,
                 email: 1,
-                isActive: 1,
-                hobbies: 1,
                 address: 1
             }
         }
@@ -78,6 +96,23 @@ const updateUser = (id, data) => __awaiter(void 0, void 0, void 0, function* () 
         runValidators: true
     });
     return result1;
+});
+const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result1 = yield user_model_1.default.findByIdAndDelete(id);
+    if (result1) {
+        return {
+            success: true,
+            message: "User deleted successfully!",
+            data: null
+        };
+    }
+    else {
+        return {
+            success: false,
+            message: "User deleted unsuccesfull!",
+            data: "User Deletion Failed"
+        };
+    }
 });
 const appendProducts = (id, data, newProducts) => __awaiter(void 0, void 0, void 0, function* () {
     const { password, username, isActive, userId, fullName, address, age, email, hobbies, orders } = data;
@@ -166,6 +201,7 @@ exports.userServices = {
     printUser,
     createUser,
     getAllUser,
+    deleteUser,
     getSpecificUser,
     updateUser,
     appendProducts,

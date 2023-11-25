@@ -87,7 +87,10 @@ const createUser = async (req: Request, res: Response) => {
     // message: "There is an Error Printing The users";
     // success: false;
     // data: error
-    console.log(error);
+    res.status(201).json({
+      success: false,
+      message: "User Is not Created Succesfully"
+    });
   }
 };
 
@@ -141,6 +144,22 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await userServices.deleteUser(id);
+
+    console.log(" Data Deleted Succesfully");
+    console.log(result);
+  } catch (error) {
+    // message: "There is an Error Printing The users";
+    // success: false;
+    // data: error;
+
+    console.log(error);
+  }
+};
+
 const appendUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
@@ -178,6 +197,7 @@ const totalUser = async (req: Request, res: Response) => {
 export const userController = {
   printUser,
   createUser,
+  deleteUser,
   getAllUser,
   getSpecificUser,
   updateUser,

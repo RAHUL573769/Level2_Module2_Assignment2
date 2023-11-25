@@ -1,4 +1,6 @@
 // Creating User Interface
+import { Response } from "express";
+import { boolean } from "joi";
 
 interface UserInfo {
   userId: number;
@@ -35,5 +37,39 @@ interface Product1 {
   price: number;
   quantity: number;
 }
+interface PostResponse {
+  success: boolean;
+  message: string;
+  data: {
+    userId: number;
+    username: string;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+    age: number;
+    email: string;
+    isActive: boolean;
+    hobbies: [string, string];
+    address: {
+      street: string;
+      city: string;
+      country: string;
+    };
+  };
+}
 
-export { UserInfo, Output, errorOutput, Product1 };
+interface DeleteResponse {
+  success: boolean;
+  message: string;
+  data: any;
+}
+
+export {
+  UserInfo,
+  Output,
+  errorOutput,
+  Product1,
+  PostResponse,
+  DeleteResponse
+};

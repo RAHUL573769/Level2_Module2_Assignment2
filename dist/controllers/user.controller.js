@@ -89,7 +89,10 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // message: "There is an Error Printing The users";
         // success: false;
         // data: error
-        console.log(error);
+        res.status(201).json({
+            success: false,
+            message: "User Is not Created Succesfully"
+        });
     }
 });
 const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -138,6 +141,20 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const result = yield user_services_1.userServices.deleteUser(id);
+        console.log(" Data Deleted Succesfully");
+        console.log(result);
+    }
+    catch (error) {
+        // message: "There is an Error Printing The users";
+        // success: false;
+        // data: error;
+        console.log(error);
+    }
+});
 const appendUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
@@ -174,6 +191,7 @@ const totalUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.userController = {
     printUser,
     createUser,
+    deleteUser,
     getAllUser,
     getSpecificUser,
     updateUser,
