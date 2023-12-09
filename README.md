@@ -10,8 +10,26 @@ This is a Basic Crud Operations in ExpressJs and TypeScript
 4.Joi validation is done
 
   How Does The Api Works:
-  Get:https://level2-assignment-2-omega.vercel.app/api/users  
-  POST:https://level2-assignment-2-omega.vercel.app/api/users  
-  Get Specific Users:https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
-  Delete:https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
-  Patch::https://level2-assignment-2-omega.vercel.app/api/users/6561b84615aac8c693529cf7  
+userRouter.post('/', userController.createAUser);
+
+userRouter.get('/', userController.getAllUsers);
+
+userRouter.get('/:userId', userController.getSpecificUserByUserId);
+
+userRouter.put('/:userId', userController.updateUserController);
+
+userRouter.delete('/:userId', userController.userDeleteController);
+
+userRouter.put('/:userId/orders', userController.userOrdersUpdateController);
+
+userRouter.get('/:userId/orders', userController.userGetAllOrdersController);
+
+userRouter.get(
+  '/:userId/orders/total-price',
+  userController.userGetOrdersTotalController,
+);
+Route Info:
+Get Users:https://assignment-2-lake.vercel.app/api/users
+Post Users:https://assignment-2-lake.vercel.app/api/users
+Update USERS:https://assignment-2-lake.vercel.app/api/users/2
+Delete Users:https://assignment-2-lake.vercel.app/api/users/2
