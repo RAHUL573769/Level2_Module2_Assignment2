@@ -33,3 +33,4 @@ Get Users:https://assignment-2-lake.vercel.app/api/users
 Post Users:https://assignment-2-lake.vercel.app/api/users
 Update USERS:https://assignment-2-lake.vercel.app/api/users/2
 Delete Users:https://assignment-2-lake.vercel.app/api/users/6
+   Get
